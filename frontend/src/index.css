@@ -1,0 +1,265 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    @apply antialiased;
+    font-feature-settings: 'liga' 1, 'calt' 1;
+    background-color: #f5f1eb;
+    color: #1a1a1a;
+  }
+  
+  /* Light theme default for public pages */
+  body.light-theme {
+    background-color: #f5f1eb;
+    color: #1a1a1a;
+  }
+  
+  /* Dark theme for admin/merchant pages */
+  body.dark-theme {
+    @apply bg-secondary-900 text-secondary-100;
+  }
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+  }
+  
+  /* Dark theme scrollbar */
+  .dark-theme ::-webkit-scrollbar-track {
+    @apply bg-void-light;
+  }
+
+  .dark-theme ::-webkit-scrollbar-thumb {
+    @apply bg-obsidian-700 rounded-full;
+  }
+
+  .dark-theme ::-webkit-scrollbar-thumb:hover {
+    @apply bg-obsidian-600;
+  }
+}
+
+@layer components {
+  /* Button Components */
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 
+           focus:outline-none focus:ring-2 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700
+           focus:ring-primary-500 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary-600 text-white hover:bg-secondary-700
+           focus:ring-secondary-500 focus:ring-offset-2;
+  }
+
+  .btn-success {
+    @apply btn bg-success-500 text-white hover:bg-success-600
+           focus:ring-success-500;
+  }
+
+  .btn-danger {
+    @apply btn bg-danger-500 text-white hover:bg-danger-600
+           focus:ring-danger-500;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-gray-600 hover:bg-gray-100
+           hover:text-gray-900;
+  }
+  
+  /* Dark theme button colors */
+  .dark-theme .btn-primary {
+    @apply btn bg-darkAccent-primary text-white hover:bg-darkAccent-primary/90
+           focus:ring-darkAccent-primary shadow-obsidian;
+  }
+
+  .dark-theme .btn-secondary {
+    @apply btn bg-surface text-obsidian-100 hover:bg-surface-hover
+           border border-obsidian-600 focus:ring-darkAccent-secondary;
+  }
+
+  .dark-theme .btn-ghost {
+    @apply btn bg-transparent text-obsidian-300 hover:bg-surface-hover
+           hover:text-obsidian-100;
+  }
+
+  /* Card Components */
+  .card {
+    @apply bg-white rounded-xl shadow-md border border-gray-200
+           transition-all duration-200;
+  }
+
+  .card:hover {
+    @apply shadow-lg border-gray-300;
+  }
+
+  .card-hover {
+    @apply bg-white rounded-xl shadow-md border border-gray-200
+           transition-all duration-200 hover:shadow-xl hover:border-gray-400
+           hover:transform hover:-translate-y-1;
+  }
+  
+  /* Dark theme cards */
+  .dark-theme .card {
+    @apply bg-surface rounded-xl shadow-obsidian-lg border border-obsidian-700
+           transition-all duration-200;
+  }
+
+  .dark-theme .card:hover {
+    @apply shadow-obsidian-xl border-obsidian-600;
+  }
+
+  .dark-theme .card-hover {
+    @apply bg-surface rounded-xl shadow-obsidian-lg border border-obsidian-700
+           transition-all duration-200 hover:shadow-obsidian-xl hover:border-obsidian-600
+           hover:transform hover:-translate-y-1;
+  }
+
+  /* Input Components */
+  .input {
+    @apply w-full px-4 py-2 bg-white border border-gray-300
+           rounded-lg text-gray-900 placeholder-gray-400
+           focus:outline-none focus:ring-2 focus:ring-primary-500
+           focus:border-primary-500 transition-colors duration-200;
+  }
+
+  .input-error {
+    @apply input border-danger-500 focus:ring-danger-500 focus:border-danger-500;
+  }
+  
+  /* Dark theme inputs */
+  .dark-theme .input {
+    @apply w-full px-4 py-2 bg-surface-elevated border border-obsidian-600
+           rounded-lg text-obsidian-100 placeholder-obsidian-400
+           focus:outline-none focus:ring-2 focus:ring-darkAccent-primary
+           focus:border-darkAccent-primary transition-colors duration-200;
+  }
+
+  .dark-theme .input-error {
+    @apply input border-darkAccent-danger focus:ring-darkAccent-danger;
+  }
+
+  /* Badge Components */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply badge bg-primary-100 text-primary-700;
+  }
+
+  .badge-success {
+    @apply badge bg-success-100 text-success-600;
+  }
+
+  .badge-warning {
+    @apply badge bg-yellow-100 text-yellow-700;
+  }
+
+  .badge-danger {
+    @apply badge bg-danger-100 text-danger-600;
+  }
+
+  /* Glass Effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-gray-200;
+  }
+
+  .dark-theme .glass {
+    @apply bg-surface/80 backdrop-blur-md border border-obsidian-700/50;
+  }
+
+  /* Glow Effects */
+  .glow-primary {
+    @apply shadow-glow-primary;
+  }
+
+  .glow-success {
+    @apply shadow-glow-success;
+  }
+
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Page Header */
+  .page-header {
+    @apply border-b border-gray-200 pb-4 mb-6;
+  }
+
+  .dark-theme .page-header {
+    @apply border-b border-obsidian-700 pb-4 mb-6;
+  }
+
+  /* Loading Spinner */
+  .spinner {
+    @apply animate-spin rounded-full border-2 border-gray-300 
+           border-t-primary-600 h-6 w-6;
+  }
+
+  .dark-theme .spinner {
+    @apply animate-spin rounded-full border-2 border-obsidian-700 
+           border-t-darkAccent-primary h-6 w-6;
+  }
+}
+
+@layer utilities {
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary-600 to-secondary-600
+           bg-clip-text text-transparent;
+  }
+
+  .bg-gradient-dark {
+    @apply bg-gradient-to-br from-void-light via-void to-void-dark;
+  }
+
+  .transition-default {
+    @apply transition-all duration-200 ease-in-out;
+  }
+}
+
+/* Custom Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(99, 102, 241, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 1000px 100%;
+}

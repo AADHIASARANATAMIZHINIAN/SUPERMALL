@@ -1,0 +1,31 @@
+const rateLimit = require('express-rate-limit');
+
+const rateLimiter = rateLimit({
+  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
+  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
+  message: {
+    success: false,
+    message: 'Too many requests from this IP, please try again later'
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+  // Skip rate limiting for certain IPs (e.g., internal services)
+  skip: (req) => {
+    const trustedIPs = (process.env.TRUSTED_IPS || '').split(',');
+    return trustedIPs.includes(req.ip);
+  }
+});
+
+// Stricter rate limiter for auth routes
+const authRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // 5 requests per window
+  message: {
+    success: false,
+    message: 'Too many authentication attempts, please try again later'
+  },
+  skipSuccessfulRequests: true
+});
+
+module.exports = rateLimiter;
+module.exports.authRateLimiter = authRateLimiter;
